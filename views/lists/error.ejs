@@ -1,0 +1,16 @@
+<% layout("layouts/boilerplate.ejs") %>
+
+    <body>
+        <div class="container d-flex flex-column justify-content-center p-4 mt-3 mb-5">
+            <div class="error-page ">
+                <div class="error-content">
+                    <div class="error-code">
+                        <%= statusCode %>
+                    </div>
+                    <div class="error-message">Oops! <%= message %></div>
+                    <p class="lead">The page you're looking for doesn't exist.</p>
+                    <a href="/lists" class="btn btn-danger btn-home">Go Back to Home</a>
+                </div>
+            </div>
+        </div>
+    </body>

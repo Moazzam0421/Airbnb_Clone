@@ -1,0 +1,188 @@
+.navbar-brand svg {
+    color: red;
+    font-size: 2rem;
+}
+
+.navbar {
+    height: 4.5rem;
+    background-color: white !important;
+}
+
+.nav-link {
+    color: black !important;
+}
+
+/* Customizing the navbar toggler icon */
+.custom-toggler {
+    border: none !important; /* Removes the default border */
+    background-color: transparent; /* Ensures the background is transparent */
+    outline: none; /* Removes the default outline */
+    box-shadow: none; /* Removes any shadow effects */
+    cursor: pointer; /* Ensures the cursor changes to a pointer when hovered */
+}
+
+/* Optional: Add styling for the toggler icon */
+.custom-toggler .icon {
+    color: red; /* Example color */
+}
+
+/* Optional: Add styles for active state if needed */
+.custom-toggler:active,
+.custom-toggler:focus {
+    outline: none; /* Removes outline on focus */
+    box-shadow: none; /* Removes box-shadow on focus */
+}
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: none; /* Removes default icon */
+    display: block;
+    width: 20px;
+    height: 3px;
+    background-color: red;
+    transition: transform 0.4s ease-in-out, background-color 0.4s ease-in-out;
+    border-radius: 5px;
+}
+
+/* Create two more bars to form a custom "hamburger" icon */
+.custom-toggler::before,
+.custom-toggler::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 3px;
+    background-color: red;
+    margin: 4px 0;
+    border-radius: 15px;
+    transition: transform 0.4s ease-in-out;
+}
+
+
+
+/* Add hover effect */
+.custom-toggler:hover .navbar-toggler-icon {
+    background-color: rgb(0, 0, 0);
+    transform: scale(1.2); /* Enlarges the icon on hover */
+}
+
+/* Add more animations for smoother transitions */
+.custom-toggler:hover::before,
+.custom-toggler:hover::after {
+    transform: scale(1.2);
+}
+
+
+/* Card Styling */
+.card {
+    border-radius: 2rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in, box-shadow 0.2s ease-in;
+}
+
+.card-img-top {
+    object-fit: cover;
+    height: 20rem;
+    border-top-right-radius: 1rem !important;
+    border-top-left-radius: 1rem !important;
+}
+
+.img-wrapper {
+    overflow: hidden; /* Ensures the image doesn't overflow out of the card */
+    position: relative;
+  }
+  
+  .img-wrapper img {
+    transition: transform 0.4s ease; /* Smooth transition for zoom effect */
+  }
+  
+  .card:hover .img-wrapper img {
+    transform: scale(1.1); /* Scale the image when the card is hovered */
+  }
+  
+
+.card-text {
+    font-size: 1rem;
+    text-align: center;
+}
+
+/* Show Page Styling */
+#body {
+    background-color: #f8f9fa;
+}
+
+#card-img-top {
+    object-fit: cover;
+    height: 300px;
+}
+
+.btn-danger{
+    background-color: red !important;
+}
+
+#card-body .price {
+    font-size: 1.25rem;
+    color: #007bff;
+}
+
+#list-group-item {
+    background-color: transparent;
+}
+
+.btn {
+    font-weight: 500;
+}
+
+
+/* Add new Post Styling */
+
+
+
+/* Form Styling */
+.form{
+    display: block;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Edit Styling */
+.edit-btn {
+    color: red !important;
+    transition: all 1s ease-in-out;
+}
+
+.edit-btn:hover {
+    color: #fff !important;
+    background-color: red !important;
+}
+
+
+/* Error PAge Styling */
+.error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.error-content {
+    max-width: 500px;
+}
+
+.error-code {
+    font-size: 100px;
+    font-weight: 700;
+    color: #dc3545;
+}
+
+.error-message {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.btn-home {
+    margin-top: 20px;
+}
+
+/* Footer Page Styling */

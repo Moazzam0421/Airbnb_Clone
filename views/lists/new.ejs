@@ -1,0 +1,66 @@
+<% layout('layouts/boilerplate.ejs') %>
+
+    <body>
+        <div class="container border border-2 rounded-4 border-dark p-4 mt-3 mb-5">
+            <h1 class="text-center mb-4">Add New Post</h1>
+            <form class="form needs-validation" action="/lists" method="post" novalidate>
+                <div class="row mb-3 justify-content-center">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control border border-dark border-1" name="list[title]"
+                                id="title" placeholder="Enter Title" required>
+                            <label for="title">Enter Title</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3 justify-content-center">
+                    <div class="col">
+                        <div class="form-floating">
+                            <textarea class="form-control border border-dark border-1" name="list[description]"
+                                id="description" placeholder="Enter post description" required></textarea>
+                            <label for="description">Enter Post Description</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3 justify-content-center">
+                    <div class="col">
+                        <div class="form-floating">
+                            <input type="text" class="form-control border border-dark border-1" name="list[img]"
+                                id="img" placeholder="Enter Image Link">
+                            <label for="img">Enter Image Link</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-4 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control border border-dark border-1" name="list[price]"
+                                id="price" placeholder="Enter Price" required>
+                            <label for="price">Enter Price</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control border border-dark border-1" name="list[location]"
+                                id="location" placeholder="Enter Location" required>
+                            <label for="location">Enter Location</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control border border-dark border-1" name="list[country]"
+                                id="country" placeholder="Enter Country" required>
+                            <label for="country">Enter Country</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center justify-content-center">
+                    <button type="submit" class="btn btn-outline-success rounded-4 fw-bold">Add New Post</button>
+                </div>
+            </form>
+        </div>
+    </body>
