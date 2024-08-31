@@ -81,8 +81,7 @@
 .card-img-top {
     object-fit: cover;
     height: 20rem;
-    border-top-right-radius: 1rem !important;
-    border-top-left-radius: 1rem !important;
+ 
 }
 
 .img-wrapper {
@@ -109,9 +108,16 @@
     background-color: #f8f9fa;
 }
 
-#card-img-top {
-    object-fit: cover;
+#show-img {
+    object-fit: contain;
     height: 300px;
+}
+.btn-outline-danger{
+    color: red !important;
+}
+.btn-outline-danger:hover{
+    background-color: red !important;
+    color: white !important;
 }
 
 .btn-danger{
@@ -184,5 +190,29 @@
 .btn-home {
     margin-top: 20px;
 }
+
+
+/* Star Rating Styling on the show page rating form */
+.star-rating {
+    direction: rtl; /* Right-to-left to make stars align properly */
+    display: inline-block;
+    font-size: 2.5rem; /* Size of the stars */
+}
+
+.star-rating input {
+    display: none; /* Hide radio inputs */
+}
+
+.star-rating label {
+    color: #cdcdcd; /* Default star color */
+    cursor: pointer; /* Pointer cursor for better UX */
+}
+
+.star-rating input:checked ~ label,
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+    color: #ffc517; /* Color for checked and hovered stars */
+}
+
 
 /* Footer Page Styling */

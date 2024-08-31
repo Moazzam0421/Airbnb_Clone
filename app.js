@@ -8,13 +8,16 @@ const wrapAsync = require("./Utils/wrapAsync.js");
 
 const ExpressError = require("./Utils/ExpressError.js");
 
-const sampleListings = require("./schema.js");
+const {sampleListings, reviewSchema} = require("./schema.js");
 
 app.engine('ejs', engine);
 
 const List = require("./models/listing.js");
 
-const defaultLink = '/images/defaultImage.jpg';
+const Review = require("./models/reviews.js");
+const { wrap } = require('module');
+
+const defaultLink = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUU4wbn61wXKaNC0Zzl5az6ZsXWw04gQDbjmhWRBAnyzGemEO_0g6L3YP7ojSjUnzS7ns&usqp=CAU ';
 
 
 app.set("views", path.join(__dirname, "views"));
@@ -45,9 +48,19 @@ const validateListings = (req, res, next) => {
     }
 };
 
+const validateReviews = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const errMsg = error.details.map(el => el.message).join(",");
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+};
+
 app.get("/lists", wrapAsync(async (req, res)=>{
     // Update all documents with the same image URL
-    // await List.updateMany({}, {img: defaultLink});
+    await List.updateMany({}, {img: defaultLink});
     let allList = await List.find({});
     // console.log(allList);
     res.render("./lists/index.ejs", {allList});
@@ -84,7 +97,7 @@ app.put("/lists/:id", validateListings, wrapAsync(async (req, res)=>{
 //Show Route
 app.get("/lists/:id", wrapAsync(async (req, res)=>{
     let {id} = req.params;
-    let list = await List.findById(id);
+    let list = await List.findById(id).populate("reviews");
     res.render("./lists/show.ejs", {list});
 }));
 
@@ -93,6 +106,27 @@ app.delete("/lists/:id", wrapAsync(async (req, res)=>{
     let {id} = req.params;
     await List.findByIdAndDelete(id);
     res.redirect("/lists");
+}));
+
+
+// Review Route
+app.post("/lists/:id/reviews", validateReviews, wrapAsync( async (req, res) => {
+    let lists = await List.findById(req.params.id);
+    let newReview = await Review(req.body.reviews)
+    lists.reviews.push(newReview);
+
+    await newReview.save();
+    await lists.save();
+    res.redirect(`/lists/${lists._id}`)
+}));
+
+// Delete Review Route
+app.delete("/lists/:id/reviews/:reviewId", wrapAsync( async (req, res) =>{
+    let {id, reviewId} = req.params;
+    await List.findByIdAndUpdate(id, { $pull: {reviews: reviewId}});
+    await Review.findByIdAndDelete(reviewId);
+
+    res.redirect(`/lists/${id}`);
 }));
 
 app.all("*", (req, res, next)=>{

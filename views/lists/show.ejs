@@ -3,36 +3,42 @@
     <body>
         <div class="container mb-5">
             <h1 class="text-center mb-4">Post Details</h1>
-    
+
             <div class="row gy-4 justify-content-center">
                 <!-- Card Section -->
-                <div class="col-12 col-md-8 col-lg-5">
-                    <div class="card shadow-lg rounded-4 overflow-hidden">
-                        <img src="<%= list.img %>" class="card-img-top img-fluid" alt="list-image">
+                <div class="col-sm-12 col-md-6 col-lg-8">
+                    <div class="card shadow rounded-4 overflow-hidden">
+                        <h4 class="card-title  text-center py-2"><strong>
+                                <%= list.title %>
+                            </strong></h4>
+                        <img src="<%= list.img %>" id="show-img" class="card-img-top img-fluid" alt="list-image">
                         <div class="card-body text-center">
-                            <h4 class="card-title"><strong><%= list.title %></strong></h4>
                             <p class="card-text">
-                                <span class="price">&#8377; <%= Number(list.price).toLocaleString("en-IN") %> / Night</span>
+                                <span class="price fw-bold">&#8377; <%= Number(list.price).toLocaleString("en-IN") %> /
+                                        Night</span>
                             </p>
                         </div>
-                    </div>
-                </div>
-    
-                <!-- Details Section -->
-                <div class="col-12 col-md-8 col-lg-7">
-                    <div class="card p-4 rounded-4 shadow-lg">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Title:</strong> <%= list.title %></li>
-                            <li class="list-group-item"><strong>Description:</strong> <%= list.description %></li>
-                            <li class="list-group-item"><strong>Price:</strong> &#8377; <%= Number(list.price).toLocaleString("en-IN") %></li>
-                            <li class="list-group-item"><strong>Location:</strong> <%= list.location %></li>
-                            <li class="list-group-item"><strong>Country:</strong> <%= list.country %></li>
-                            <li class="list-group-item"><strong>Image URL:</strong> <%= list.img %></li>
+                            <li class="list-group-item"><strong>Title:</strong>
+                                <%= list.title %>
+                            </li>
+                            <li class="list-group-item"><strong>Description:</strong>
+                                <%= list.description %>
+                            </li>
+                            <li class="list-group-item "><strong>Price:</strong> &#8377; <%=
+                                    Number(list.price).toLocaleString("en-IN") %>
+                            </li>
+                            <li class="list-group-item"><strong>Location:</strong>
+                                <%= list.location %>
+                            </li>
+                            <li class="list-group-item"><strong>Country:</strong>
+                                <%= list.country %>
+                            </li>
                         </ul>
                         <!-- Action Buttons -->
-                        <div class="text-center mt-4 d-flex flex-column flex-md-row justify-content-around gap-2">
+                        <div class="text-center m-4  d-flex flex-column flex-md-row justify-content-around gap-2">
                             <a href="/lists/<%= list._id %>/edit" class="btn btn-dark">Edit</a>
-                            <a href="/lists" class="btn btn-secondary">Back to List page</a>
+                            <a href="/lists" class="btn btn-outline-danger">Back to List page</a>
                             <form action="/lists/<%= list._id %>?_method=DELETE" method="post" class="d-inline">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </form>
@@ -40,5 +46,96 @@
                     </div>
                 </div>
             </div>
+
+            <hr class="mt-5">
+
+            <div class="row d-flex justify-content-center">
+                <div id="review-body" class="col-sm-12 col-md-6 col-lg-8">
+                    <form class="form needs-validation" action="/lists/<%= list._id %>/reviews" method="post"
+                        novalidate>
+                        <h4 class="text-center py-2 text-primary">Leave a Rating</h4>
+                        <div class="row mt-4 mb-2 justify-content-center">
+                            <!-- Star Rating Section -->
+                            <div class="text-center mb-2">
+                                <h5 class="fw-bold">Rating </h5>
+                                <div class="star-rating ">
+                                    <input type="radio" id="star5" name="reviews[rating]" value="5" required />
+                                    <label for="star5" title="5 stars" class="star">&#9733;</label>
+                                    <input type="radio" id="star4" name="reviews[rating]" value="4" />
+                                    <label for="star4" title="4 stars" class="star">&#9733;</label>
+                                    <input type="radio" id="star3" name="reviews[rating]" value="3" />
+                                    <label for="star3" title="3 stars" class="star">&#9733;</label>
+                                    <input type="radio" id="star2" name="reviews[rating]" value="2" />
+                                    <label for="star2" title="2 stars" class="star">&#9733;</label>
+                                    <input type="radio" id="star1" name="reviews[rating]" value="1" />
+                                    <label for="star1" title="1 star" class="star">&#9733;</label>
+                                </div>
+                            </div>
+
+                            <!-- Comment Section -->
+                            <div class="p-1">
+                                <div class="form-floating">
+                                    <textarea class="form-control border border-dark border-1" name="reviews[comment]"
+                                        id="comment" placeholder="Enter post description" required></textarea>
+                                    <label for="comment">Leave a Comment here</label>
+                                    <div class="invalid-feedback isvalid">Please submit some comment for us</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="text-center justify-content-center">
+                            <button type="submit" class="btn btn-outline-dark rounded-4 fw-bold">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="all-reviews-body container my-5">
+                <h2 class="text-center mb-4 text-primary">All Reviews</h2>
+                <div class="row">
+                    <% if (list.reviews.length > 0) { %>
+                        <% for (review of list.reviews) { %>
+                            <div class="col-md-6 mb-4">
+                                <div class="card shadow border d-flex align-items-center justify-content-center">
+                                    <div class="card-body">
+                                        <div class="card-title text-center">
+                                            <h1>John Doe</h1>
+                                        </div>
+                                        <h5 class="card-title text-center">
+                                            <%= review.comment %>
+                                        </h5>
+                                        <div class="d-flex d-block align-items-center justify-content-center">
+                                            <div class="me-2">Rating:</div>
+                                            <div class="review-star">
+                                                <% for (let i = 1; i <= 5; i++) { %>
+                                                    <i class="fa fa-star <%= i <= review.rating ? 'text-warning' : 'text-muted' %>"></i>
+                                                <% } %>
+                                            </div>
+                                            <span class="ms-2 text-muted">(<%= review.rating %> Stars)</span>
+                                        </div>
+                                    </div>
+                                    <div class="delete-review mb-3">
+                                        <form action="/lists/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
+                                            <button class="btn btn-danger" type="submit">Delete</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <p class="text-center text-muted fs-5">No reviews yet.</p>
+                    <% } %>
+                </div>
+
+            
+            </div>
+            
         </div>
+
+
+
+
     </body>
