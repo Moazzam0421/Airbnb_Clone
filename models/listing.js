@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Review = require('./reviews');
-const reviews = require('./reviews');
 const Schema = mongoose.Schema;
 
 // Assuming you want to generate a URL to send to the client:

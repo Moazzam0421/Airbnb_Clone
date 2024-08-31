@@ -204,7 +204,7 @@
 }
 
 .star-rating label {
-    color: #cdcdcd; /* Default star color */
+    color: #707070; /* Default star color */
     cursor: pointer; /* Pointer cursor for better UX */
 }
 
