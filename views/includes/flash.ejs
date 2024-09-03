@@ -1,0 +1,69 @@
+<style>
+    #flash-success-message,
+    #flash-error-message {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serifs;
+        letter-spacing: 2px;
+        position: absolute;
+        z-index: 2;
+        margin: 0 auto;
+        opacity: 0;
+        /* Start hidden */
+        transform: translateY(-20px);
+        /* Move slightly up */
+        transition: opacity 0.5s ease-in, transform 0.5s ease-in;
+    }
+
+    #flash-success-message.show,
+    #flash-error-message.show {
+        opacity: 1;
+        /* Start hidden */
+        transform: translateY(0px);
+        /* Move slightly up */
+        transition: opacity 0.6s ease-out, transform 0.5s ease-out;
+    }
+    .alert{
+        display: inline;
+        flex: 1;
+        justify-content: center;
+    }
+</style>
+
+
+<% if (success && success.length) { %>
+    <div class="container alert alert-success alert-dismissible fade show w-100 fw-bold text-center" id="flash-success-message"
+        role="alert">
+        <%= success %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+    </div>
+    <% } %>
+
+        <% if (error && error.length) { %>
+            <div class="container alert alert-danger alert-dismissible fade show w-100 fw-bold text-center col-6"
+                id="flash-error-message" role="alert">
+                <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" area-label="close"></button>
+            </div>
+            <% } %>
+
+                <script>
+                    // JavaScript to show and hide flash messages with animation
+                    window.onload = function () {
+                        // Function to handle the display of flash messages
+                        function handleFlashMessage(id) {
+                            var flashMessage = document.getElementById(id);
+                            if (flashMessage) {
+                                flashMessage.classList.add('show');
+                                setTimeout(function () {
+                                    flashMessage.classList.remove('show');
+                                    setTimeout(function () {
+                                        flashMessage.style.display = 'none'; // Hide after animation
+                                    }, 300); // Wait for the hide transition to finish
+                                }, 3000); // Display for 3 seconds
+                            }
+                        }
+
+                        // Call the function for both success and error messages
+                        handleFlashMessage('flash-success-message');
+                        handleFlashMessage('flash-error-message');
+                    };
+                </script>

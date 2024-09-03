@@ -3,7 +3,8 @@ const router = express.Router();
 const List = require("../models/listing.js");
 const wrapAsync = require("../Utils/wrapAsync.js")
 const ExpressError = require("../Utils/ExpressError.js");
-const {sampleListings} = require("../schema.js");
+const { sampleListings } = require("../schema.js");
+
 
 
 
@@ -20,17 +21,17 @@ const validateListings = (req, res, next) => {
     }
 };
 
-router.get("/", wrapAsync(async (req, res)=>{
+router.get("/", wrapAsync(async (req, res) => {
     // Update all documents with the same image URL
-    await List.updateMany({}, {img: defaultLink});
+    await List.updateMany({}, { img: defaultLink });
     let allList = await List.find({});
     // console.log(allList);
-    res.render("./lists/index.ejs", {allList});
+    res.render("./lists/index.ejs", { allList });
 }));
 
 
 //New Route
-router.get("/new", wrapAsync(async (req, res)=>{
+router.get("/new", wrapAsync(async (req, res) => {
     res.render("./lists/new.ejs");
 }));
 
@@ -38,35 +39,47 @@ router.get("/new", wrapAsync(async (req, res)=>{
 router.post("/", validateListings, wrapAsync(async (req, res, next) => {
     let newList = new List(req.body.list);
     await newList.save();
+    req.flash("success", "New Post Added Successfully!");
     res.redirect("/lists");
 }));
 
 
 //Edit Route
-router.get("/:id/edit", wrapAsync(async (req, res)=>{
-    let {id} = req.params;
+router.get("/:id/edit", wrapAsync(async (req, res) => {
+    let { id } = req.params;
     const list = await List.findById(id);
-    res.render("./lists/edit.ejs", {list});
+    if (!list) {
+        req.flash("error", "Post you searched for does not exist!");
+        res.redirect("/lists");
+    }
+    res.render("./lists/edit.ejs", { list });
 }));
 
 //Update Route
-router.put("/:id", validateListings, wrapAsync(async (req, res)=>{
-    let {id} = req.params;
-    await List.findByIdAndUpdate(id, {...req.body.list});
+router.put("/:id", validateListings, wrapAsync(async (req, res) => {
+    let { id } = req.params;
+    await List.findByIdAndUpdate(id, { ...req.body.list });
+    req.flash("success", "Post is Updated Successfully!");
     res.redirect(`./${id}`);
 }));
 
 //Show Route
-router.get("/:id", wrapAsync(async (req, res)=>{
-    let {id} = req.params;
+router.get("/:id", wrapAsync(async (req, res) => {
+    let { id } = req.params;
     let list = await List.findById(id).populate("reviews");
-    res.render("./lists/show.ejs", {list});
+    if (!list) {
+        req.flash("error", "Post you searched for does not exist!");
+        res.redirect("/lists");
+    }
+    res.render("./lists/show.ejs", { list });
 }));
 
 //Delete Route
-router.delete("/:id", wrapAsync(async (req, res)=>{
-    let {id} = req.params;
+// Example delete route using wrapAsync in listing.js
+router.delete("/:id", wrapAsync(async (req, res) => {
+    let { id } = req.params;
     await List.findByIdAndDelete(id);
+    req.flash("error", "Post was Deleted Successfully!");
     res.redirect("/lists");
 }));
 

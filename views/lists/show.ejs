@@ -99,7 +99,7 @@
                     <% if (list.reviews.length > 0) { %>
                         <% for (review of list.reviews) { %>
                             <div class="col-md-6 mb-4">
-                                <div class="card shadow border d-flex align-items-center justify-content-center">
+                                <div class="card shadow border">
                                     <div class="card-body">
                                         <div class="card-title text-center">
                                             <h1>John Doe</h1>
@@ -117,7 +117,7 @@
                                             <span class="ms-2 text-muted">(<%= review.rating %> Stars)</span>
                                         </div>
                                     </div>
-                                    <div class="delete-review mb-3">
+                                    <div class="delete-review mb-3 d-flex justify-content-center">
                                         <form action="/lists/<%= list._id %>/reviews/<%= review._id %>?_method=DELETE" method="post">
                                             <button class="btn btn-danger" type="submit">Delete</button>
                                         </form>
