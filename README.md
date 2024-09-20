@@ -2,7 +2,7 @@ This project implements a robust authentication and authorization system using *
 
 ## Key Features
 
-1. **User Authentication with Passport.js**
+1. **User Authentication with Passport.js** 
    - Added login and logout functionality using Passport.js.
    - Users can securely log in and log out from the application.
    - Session management is handled to keep users logged in during their session.
