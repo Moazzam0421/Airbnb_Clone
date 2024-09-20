@@ -87,20 +87,37 @@
 .img-wrapper {
     overflow: hidden; /* Ensures the image doesn't overflow out of the card */
     position: relative;
+    display: flex;
+    align-items: self-end;
+    justify-content: center;
   }
   
   .img-wrapper img {
     transition: transform 0.4s ease; /* Smooth transition for zoom effect */
   }
   
-  .card:hover .img-wrapper img {
-    transform: scale(1.1); /* Scale the image when the card is hovered */
+  .card:hover .img-wrapper img{
+    transform: scale(1.2); /* Scale the image when the card is hovered */
   }
+
   
 
 .card-text {
     font-size: 1rem;
     text-align: center;
+}
+
+#card-info-btn {
+    position: absolute;
+    z-index: 99;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Target the #card-info-btn when hovering over the .card */
+.card:hover #card-info-btn {
+    opacity: 1;
 }
 
 /* Show Page Styling */
@@ -136,10 +153,6 @@
 .btn {
     font-weight: 500;
 }
-
-
-/* Add new Post Styling */
-
 
 
 /* Form Styling */
