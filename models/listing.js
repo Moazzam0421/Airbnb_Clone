@@ -3,7 +3,7 @@ const Review = require('./reviews');
 const Schema = mongoose.Schema;
 
 // Assuming you want to generate a URL to send to the client:
-const defaultLink = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUU4wbn61wXKaNC0Zzl5az6ZsXWw04gQDbjmhWRBAnyzGemEO_0g6L3YP7ojSjUnzS7ns&usqp=CAU';
+const defaultLink = '/images/defaultImage.jpg';
 
 const listSchema = new Schema({
     title: {
@@ -11,11 +11,16 @@ const listSchema = new Schema({
         required: true
     },
     description: String,
-    img: {
-        type: String,
-        default: defaultLink,
-        set: (v) => v===""? defaultLink : v,
+    image: {
+        url: {
+            type: String,
+            default: defaultLink // Default URL path for the image if none is uploaded
+        },
+        filename: {
+            type: String,
+        }
     },
+    
     price: {
         type: Number,
     },

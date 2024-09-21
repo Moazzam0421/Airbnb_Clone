@@ -1,4 +1,4 @@
-const List = require("../models/listing")
+const List = require("../models/listing");
 
 module.exports.index = async (req, res) => {
     // Update all documents with the same image URL
@@ -12,20 +12,22 @@ module.exports.newList = async (req, res, next) => {
     res.render("./lists/new.ejs");
 }
 
-module.exports.createRouteWithImg = async (req, res, next) => {
-    const newList = new List(req.body.list);
+module.exports.createListWithImg = async (req, res, next) => {
+    let url = req.file.path;
+    let filename = req.file.filename;  // Corrected this too; use `req.file.filename` for Cloudinary's filename
+    console.log(url, "  ", filename);  // Remove `path`, log only `url` and `filename`
 
-    // Check if an image was uploaded and set the image path
-    if (req.file) {
-        newList.img = `/uploads/${req.file.filename}`;
-    } else {
-        newList.img = defaultLink; // Set default image if no image is uploaded
-    }
+    const newList = new List(req.body.list);
+    newList.image = { url, filename };
+    console.log(newList.image);
+
     newList.owner = req.user._id;
     await newList.save();
+
     req.flash("success", "New Post Added Successfully!");
     res.redirect("/lists");
 }
+
 
 module.exports.editRoute = async (req, res) => {
     let { id } = req.params;
@@ -34,19 +36,24 @@ module.exports.editRoute = async (req, res) => {
         req.flash("error", "Post you searched for does not exist!");
         res.redirect("/lists");
     }
-    res.render("./lists/edit.ejs", { list });
+
+    let orignalImgUrl = list.image.url;
+    orignalImgUrl = orignalImgUrl.replace("/upload", "/upload/w_200");
+    res.render("./lists/edit.ejs", { list, orignalImgUrl });
 }
 
 module.exports.updateRoute = async (req, res) => {
     let { id } = req.params;
     const updatedData = req.body.list;
+    let updatedList = await List.findByIdAndUpdate(id, updatedData);
 
-    // Check if a new image is uploaded
-    if (req.file) {
-        updatedData.img = `/uploads/${req.file.filename}`;
+    if (typeof req.file !== "undefined") {
+        let url = req.file.path;
+        let filename = req.file.filename;
+
+        updatedList.image = { url, filename };
+        await updatedList.save();
     }
-
-    await List.findByIdAndUpdate(id, updatedData);
 
     req.flash("success", "Post is Updated Successfully!");
     res.redirect(`./${id}`);
@@ -55,13 +62,13 @@ module.exports.updateRoute = async (req, res) => {
 module.exports.showRoute = async (req, res) => {
     let { id } = req.params;
     let list = await List.findById(id)
-    .populate({
-        path: "reviews",
-        populate: {
-            path: "author",
-        },
-    })
-    .populate("owner");
+        .populate({
+            path: "reviews",
+            populate: {
+                path: "author",
+            },
+        })
+        .populate("owner");
     if (!list) {
         req.flash("error", "Post you searched for does not exist!");
         res.redirect("/lists");

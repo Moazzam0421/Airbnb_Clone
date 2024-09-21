@@ -77,9 +77,9 @@ app.use("/lists/:id/reviews", reviewRoute);
 app.use("/", userRoute);
 
 // Home Route
-app.get('/', (req, res) => {
-    res.send("Working");
-});
+// app.get('/', (req, res) => {
+//     res.send("Working");
+// });
 
 // Error Handling
 app.all("*", (req, res, next) => {

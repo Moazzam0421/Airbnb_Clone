@@ -6,10 +6,10 @@
         <form class="form needs-validation" action="/lists/<%= list._id %>?_method=PUT" method="POST" enctype="multipart/form-data" novalidate>
             
             <!-- Display current image -->
-            <% if (list.img) { %>
+            <% if (list.image) { %>
                 <div class="row mb-3 justify-content-center">
                     <div class="col text-center">
-                        <img src="<%= list.img %>" class="img-fluid rounded mb-3" alt="Current Image" style="max-height: 200px;">
+                        <img src="<%= orignalImgUrl %>" class="img-fluid rounded-circle mb-3" alt="Current Image" style="object-fit: cover; width: 150px; height: 150px;">
                     </div>
                 </div>
                 <% } %>
@@ -17,7 +17,7 @@
                 <div class="row mb-3 justify-content-center">
                     <div class="col">
                         <div class="form-floating">
-                            <input type="file" class="form-control border border-dark border-1" name="image" id="img" placeholder="Upload Image">
+                            <input type="file" class="form-control border border-dark border-1" name="list[image]" id="img" placeholder="Upload Image">
                             <label for="img">Upload New Image (Optional)</label>
                         </div>
                     </div>
