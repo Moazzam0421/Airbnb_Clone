@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-md bg-body-light sticky-top border-bottom">
-    <div class="container-fluid ">
+<div class="sticky-top">
+    <nav class="navbar navbar-expand-md  border-bottom">
         <a class="navbar-brand ms-4 " href="/lists">
             <svg width="102" height="32">
                 <path
@@ -15,22 +15,57 @@
             aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
+    
         <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
             <div class="navbar-nav bg-white">
-                <a class="nav-link" href="/lists">Explore</a>
+                <a class="nav-link" href="/lists" style="font-weight: 500;">Explore</a>
             </div>
-            <div class="navbar-nav ms-auto bg-white" >
-                <a class="nav-link fw-bold" href="/lists/new">Airbnb your home</a>
-                <% if(!currUser) { %>
-                    <a class="nav-link" href="/signup" style="font-weight: 500;">SignUp</a>
-                    <a class="nav-link " href="/login" style="font-weight: 500;">Login</a>
-                <% } %>    
-                <% if (currUser) { %>
-                    <a class="nav-link" href="/logout" style="font-weight: 500;">Logout</a>
-                <% } %>
-                
+            <div class="navbar-nav ms-auto">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2 rounded-pill" id="input-btn" type="search"
+                        placeholder="Search Destination" aria-label="Search">
+                    <button class="btn btn-outline-dark  rounded-pill d-flex align-items-center" id="search-btn"
+                        type="submit">
+                        <i class="fa-solid fa-magnifying-glass me-1"></i>Search</button>
+                </form>
+            </div>
+            <div class="navbar-nav ms-auto bg-white">
+                <div id="add-list" class="rounded-pill">
+                    <a class="nav-link px-3 " href="/lists/new">Switch to hosting</a>
+                </div>
+    
+                <button id="sidebar-icons" class="btn rounded-pill border border-2 me-4">
+                    <i class="fa-solid fa-bars me-2"></i>
+                    <i class="fa-regular fa-user ms-1"></i>
+                </button>
+                <div class="sidebar" style="display: none;">
+                    <% if(!currUser) { %>
+                        <a class="nav-link" href="/signup">SignUp</a>
+                        <a class="nav-link " href="/login">Login</a>
+                        <% } %>
+                            <% if (currUser) { %>
+                                <a class="nav-link" href="/logout">Logout</a>
+                                <% } %>
+                </div>
+    
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
+    <% if(path === '/lists' || path === '/lists/new') { %>
+      <%- include('../includes/filter.ejs') %>
+    <% } %>
+
+</div>
+
+
+    <script>
+        // Select the sidebar and sidebar button properly
+        let sidebar = document.getElementsByClassName("sidebar")[0]; // Reference the first element in the collection
+        let sidebarBtn = document.getElementById("sidebar-icons");   // Use getElementById (not getElementsById)
+
+        // Add event listener for click action
+        sidebarBtn.addEventListener("click", () => {
+            sidebar.style.display = (sidebar.style.display === "block") ? "none" : "flex";
+            sidebarBtn.style.display = "none"
+        });
+    </script>

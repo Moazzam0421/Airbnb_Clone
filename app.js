@@ -65,6 +65,7 @@ app.use((req, res, next) => {
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user; // it is for Navbar login , signup, and logout
+    res.locals.path = req.originalUrl;
     next();
 });
 
@@ -75,11 +76,6 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use("/lists", listingRoute);
 app.use("/lists/:id/reviews", reviewRoute);
 app.use("/", userRoute);
-
-// Home Route
-// app.get('/', (req, res) => {
-//     res.send("Working");
-// });
 
 // Error Handling
 app.all("*", (req, res, next) => {

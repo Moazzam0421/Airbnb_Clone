@@ -1,0 +1,149 @@
+<div class="filter-box">
+  <div class="filter-container mx-2">
+    <button class="scroll-btn left rounded-circle" onclick="scrollToLeft()">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+    <div class="filter-wrapper py-1">
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-icons active"></i></div>
+        <span class="filter-text">Icons</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-fire"></i></div>
+        <span class="filter-text">Trends</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-brands fa-canadian-maple-leaf"></i></div>
+        <span class="filter-text">Amazing Views</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-cow"></i></div>
+        <span class="filter-text">Farms</span>
+      </div>
+
+      <!-- Additional Filter Bodies -->
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-play"></i></div>
+        <span class="filter-text">Play</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-paint-brush"></i></div>
+        <span class="filter-text">Design</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-door-open"></i></div>
+        <span class="filter-text">Rooms</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-bolt"></i></div>
+        <span class="filter-text">OMG!</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-house"></i></div>
+        <span class="filter-text">Cabins</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-tree"></i></div>
+        <span class="filter-text">Treehouses</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-gem"></i></div>
+        <span class="filter-text">Luxe</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-landmark"></i></div>
+        <span class="filter-text">Historical Homes</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-umbrella-beach"></i></div>
+        <span class="filter-text">Beach</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-landmark-flag"></i></div>
+        <span class="filter-text">Countryside</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-home"></i></div>
+        <span class="filter-text">Tiny Homes</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-igloo"></i></div>
+        <span class="filter-text">Domes</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-water"></i></div>
+        <span class="filter-text">Beachfront</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-tree"></i></div>
+        <span class="filter-text">National Parks</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-water"></i></div>
+        <span class="filter-text">Lake</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-mountain"></i></div>
+        <span class="filter-text">Island</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-snowflake"></i></div>
+        <span class="filter-text">Arctic</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-utensils"></i></div>
+        <span class="filter-text">Chef's Kitchen</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-cookie"></i></div>
+        <span class="filter-text">Desert</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-ship"></i></div>
+        <span class="filter-text">Boats</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-wave-square"></i></div>
+        <span class="filter-text">Surfing</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-spa"></i></div>
+        <span class="filter-text">Minshus</span>
+      </div>
+      <div class="filter-body text-center">
+        <div class="filter-icon"><i class="fa-solid fa-skiing"></i></div>
+        <span class="filter-text">Ski-in/out</span>
+      </div>
+
+
+
+    </div>
+
+    <button class="scroll-btn right rounded-circle" onclick="scrollToRight()">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+  <div class="form-check form-switch form-check-reverse ms-auto me-4 w-100 d-md-block d-sm-inline" id="form-check">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+    <label class="form-check-label" for="flexSwitchCheckDefault">Display after all Taxes</label>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let switchButton = document.getElementById("flexSwitchCheckDefault");
+    let gstSpans = document.querySelectorAll("#gst");
+    switchButton.addEventListener("click", () => {
+      gstSpans.forEach(span => {
+        if (span.style.display === "none") {
+          span.style.display = "inline";
+        } else {
+          span.style.display = "none";
+        }
+      });
+    });
+  });
+</script>

@@ -1,16 +1,49 @@
+.navbar {
+    width: 100%;
+    height: 4.5rem;
+    background-color: rgb(255, 255, 255) !important;
+}
+
 .navbar-brand svg {
     color: red;
     font-size: 2rem;
 }
 
-.navbar {
-    height: 4.5rem;
-    background-color: white !important;
+#input-btn{
+    font-size: .8rem;
 }
+
+#search-btn{
+    font-size: .7rem;
+}
+
+.poppins-regular {
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
 
 .nav-link {
     color: black !important;
 }
+
+#sidebar-icons .fa-user{
+    border: 1px solid black;
+    padding: 4px 5px;
+    border-radius: 50%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(82, 82, 82);
+}
+#add-list{
+    font-size: .9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+#add-list:hover{
+    background-color: #f1efefb3;
+}
+
 
 /* Customizing the navbar toggler icon */
 .custom-toggler {
@@ -73,30 +106,40 @@
 
 /* Card Styling */
 .card {
-    border-radius: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in, box-shadow 0.2s ease-in;
 }
 
 .card-img-top {
     object-fit: cover;
-    height: 20rem;
- 
 }
 
 .img-wrapper {
-    overflow: hidden; /* Ensures the image doesn't overflow out of the card */
     position: relative;
-    display: flex;
-    align-items: self-end;
-    justify-content: center;
+    width: 100%;
+    padding-top: 85%; /* 4:3 aspect ratio, change this to 100% for 1:1 ratio */
+    overflow: hidden;
+  }
+
+  .img-wrapper img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  @media (max-width: 576px) {
+    .img-wrapper {
+      padding-top: 100%; /* For mobile, adjust aspect ratio to square */
+    }
   }
   
   .img-wrapper img {
     transition: transform 0.4s ease; /* Smooth transition for zoom effect */
   }
   
-  .card:hover .img-wrapper img{
+  .img-wrapper:hover img{
     transform: scale(1.2); /* Scale the image when the card is hovered */
   }
 
@@ -107,16 +150,8 @@
     text-align: center;
 }
 
-#card-info-btn {
-    position: absolute;
-    z-index: 99;
-    margin-bottom: 10px;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
 /* Target the #card-info-btn when hovering over the .card */
-.card:hover #card-info-btn {
+.img-wrapper:hover #card-info-btn {
     opacity: 1;
 }
 
