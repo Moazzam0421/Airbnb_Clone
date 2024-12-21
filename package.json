@@ -10,7 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "cloudinary": "^2.5.0",
+    "cloudinary": "^1.30.0",
     "connect-flash": "^0.1.1",
     "daisyui": "^4.12.10",
     "dotenv": "^16.4.5",
